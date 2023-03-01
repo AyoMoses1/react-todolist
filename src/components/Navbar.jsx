@@ -25,8 +25,6 @@ const Navbar = () => {
           </li>
         );
       })}
-        <li>Home</li>
-        <li>About</li>
         <li ref={ref}>
           <button onClick={() => setDropdown((prev) => !prev)}>
             Services <span>&#8595;</span>
@@ -34,7 +32,7 @@ const Navbar = () => {
           {dropdown && (
             <ul>
               <li>Design</li>
-              <li>Development</li>
+              <li>Developments</li>
             </ul>
           )}
         </li>
