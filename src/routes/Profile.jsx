@@ -1,9 +1,15 @@
-import React from 'react'
+import { useAuthContext } from '../context/AuthContext';
+import styles from '../styles/Profile.module.css';
 
-function Profile() {
+const Profile = () => {
+  const { user } = useAuthContext();
   return (
-    <div>Profile</div>
-  )
-}
-
-export default Profile
+    <div>
+      <h1>profile.</h1>
+      <div className={styles.profile}>
+        <h2>Hello, {user}</h2>
+      </div>
+    </div>
+  );
+};
+export default Profile;
