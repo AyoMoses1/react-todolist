@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
+import { AiFillEdit } from 'react-icons/ai';
 import styles from '../styles/TodoItem.module.css';
 import { useAuthContext } from '../context/AuthContext';
-import { AiFillEdit } from 'react-icons/ai';
 
-function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
+function TodoItem({
+  itemProp, handleChange, delTodo, setUpdate,
+}) {
   const [editing, setEditing] = useState(false);
   const [updateInput, setUpdateInput] = useState(itemProp.title);
   const { user } = useAuthContext();
@@ -11,14 +13,14 @@ function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
   const handleEditing = () => {
     setEditing(true);
   };
-  let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
   if (editing) {
     viewMode.display = 'none';
   } else {
     editMode.display = 'none';
   }
-  
+
   const handleUpdatedDone = (event) => {
     if (event.key === 'Enter') {
       setUpdate(updateInput, itemProp.id);
@@ -37,13 +39,13 @@ function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
       <div className={styles.content} style={viewMode}>
         <input type="checkbox" onChange={() => handleChange(itemProp.id)} />
         {user && (
-          <button onClick={handleEditing}>
+          <button type="button" onClick={handleEditing}>
             <AiFillEdit
               style={{ color: '#5e5e5e', fontSize: '16px' }}
             />
           </button>
         )}
-        <button onClick={() => delTodo(itemProp.id)}>Delete</button>
+        <button type="button" onClick={() => delTodo(itemProp.id)}>Delete</button>
         <span style={itemProp.completed ? completedStyle : null}>
           {updateInput}
         </span>
@@ -57,7 +59,7 @@ function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
         onKeyDown={handleUpdatedDone}
       />
     </li>
-  )
+  );
 }
 
-export default TodoItem
+export default TodoItem;

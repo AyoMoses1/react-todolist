@@ -10,6 +10,5 @@ root.render(
     <Router>
       <TodoApp />
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-

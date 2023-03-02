@@ -1,9 +1,8 @@
-import React, { useState, useRef} from "react";
-import { NavLink } from "react-router-dom"
-import { useAuthContext } from "../context/AuthContext";
-import { useOnClickOutside } from "../useOnClickOutside";
-import { useNavigate } from 'react-router-dom'
-
+/* eslint-disable */
+import React, { useState, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
+import useOnClickOutside from '../useOnClickOutside';
 
 const links = [
   { path: '/', text: 'Home' },
@@ -14,10 +13,10 @@ const links = [
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
-  const { user, logout } = useAuthContext()
+  const { user, logout } = useAuthContext();
 
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -31,8 +30,7 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <ul>
-        {links.map((link) => {
-          return (
+          {links.map((link) => (
             <React.Fragment key={link.text}>
               {link.path === 'login' ? (
                 !user && (
@@ -54,19 +52,7 @@ const Navbar = () => {
                 </li>
               )}
             </React.Fragment>
-          );
-        })}
-        {/* <li ref={ref}>
-          <button onClick={() => setDropdown((prev) => !prev)}>
-            Services <span>&#8595;</span>
-          </button>
-          {dropdown && (
-            <ul>
-              <li>Design</li>
-              <li>Developments</li>
-            </ul>
-          )}
-        </li> */}
+          ))}
           {!user && (
             <li className="log-in">
               <span>Log in to edit to-dos</span>
@@ -77,7 +63,7 @@ const Navbar = () => {
       {user && (
         <div className="logout">
           <p>{user}</p>
-          {<button onClick={handleLogout}>Logout</button>}
+          <button type="button" onClick={handleLogout}>Logout</button>
         </div>
       )}
     </>

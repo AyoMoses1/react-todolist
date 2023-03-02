@@ -4,14 +4,15 @@ import { useAuthContext } from '../context/AuthContext';
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuthContext();
   const location = useLocation();
-  console.log(location);
 
   if (!user) {
-    return <Navigate 
-              to="/login" 
-              state={{ pathname: location.pathname }}
-              replace
-            />;
+    return (
+      <Navigate
+        to="/login"
+        state={{ pathname: location.pathname }}
+        replace
+      />
+    );
   }
   return children;
 };

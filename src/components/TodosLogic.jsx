@@ -1,18 +1,18 @@
-import React from 'react'
-import { v4 as uuidv4 } from "uuid";
+/* eslint-disable */
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import InputTodo from './InputTodo';
 import TodosList from './TodosList';
-import { useState, useEffect } from 'react';
+
+function getInitialTodos() {
+  // getting stored items
+  const temp = localStorage.getItem('todos');
+  const savedTodos = JSON.parse(temp);
+  return savedTodos || [];
+}
 
 function TodosLogic() {
   const [todos, setTodos] = useState(getInitialTodos());
-  
-  function getInitialTodos() {
-    // getting stored items
-    const temp = localStorage.getItem('todos');
-    const savedTodos = JSON.parse(temp);
-    return savedTodos || [];
-  }
 
   useEffect(() => {
     // storing todos items
@@ -21,31 +21,27 @@ function TodosLogic() {
   }, [todos]);
 
   const handleChange = (id) => {
-    setTodos((prevState) =>
-      prevState.map((todo) => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        }
-        return todo;
-      })
-    );
+    setTodos((prevState) => prevState.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    }));
   };
 
   const delTodo = (id) => {
     setTodos([
-      ...todos.filter((todo) => {
-        return todo.id !== id;
-      }),
+      ...todos.filter((todo) => todo.id !== id),
     ]);
   };
 
   const addTodoItem = (title) => {
     const newTodo = {
       id: uuidv4(),
-      title: title,
+      title,
       completed: false,
     };
     setTodos([...todos, newTodo]);
@@ -58,16 +54,21 @@ function TodosLogic() {
           todo.title = updatedTitle;
         }
         return todo;
-      })
+      }),
     );
   };
 
   return (
     <>
-    <InputTodo addTodoItem={addTodoItem} />
-    <TodosList todosProps={todos} handleChange={handleChange} delTodo={delTodo} setUpdate={setUpdate}/>
+      <InputTodo addTodoItem={addTodoItem} />
+      <TodosList
+        todosProps={todos}
+        handleChange={handleChange}
+        delTodo={delTodo}
+        setUpdate={setUpdate}
+      />
     </>
-  )
+  );
 }
 
-export default TodosLogic
+export default TodosLogic;

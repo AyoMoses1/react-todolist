@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import styles from '../styles/Login.module.css';
-import { useAuthContext } from '../context/AuthContext'
 import { useNavigate, useLocation } from 'react-router-dom';
+import styles from '../styles/Login.module.css';
+import { useAuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
-  const { login } = useAuthContext()
-  const navigate = useNavigate()
+  const { login } = useAuthContext();
+  const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.pathname || '/';
   const handleSubmit = (e) => {
@@ -27,7 +27,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <button>Login</button>
+          <button type="button">Login</button>
         </form>
       </div>
     </div>

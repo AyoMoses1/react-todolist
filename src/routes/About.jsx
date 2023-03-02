@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 function About() {
@@ -17,7 +17,7 @@ function About() {
         <Outlet />
       </div>
     </>
-  )
+  );
 }
 
-export default About
+export default About;

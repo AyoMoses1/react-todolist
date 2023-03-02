@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
-import Navbar from './Navbar'
+import Navbar from './Navbar';
 
 function Layout() {
   return (
@@ -11,7 +11,7 @@ function Layout() {
         <Outlet />
       </AuthProvider>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
