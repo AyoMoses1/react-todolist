@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav>
+      <nav className="navbar">
         <ul>
         {links.map((link) => {
           return (
@@ -67,6 +67,11 @@ const Navbar = () => {
             </ul>
           )}
         </li> */}
+          {!user && (
+            <li className="log-in">
+              <span>Log in to edit to-dos</span>
+            </li>
+          )}
         </ul>
       </nav>
       {user && (

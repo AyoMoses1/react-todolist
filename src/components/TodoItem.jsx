@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import styles from '../styles/TodoItem.module.css';
+import { useAuthContext } from '../context/AuthContext';
+import { AiFillEdit } from 'react-icons/ai';
 
 function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
   const [editing, setEditing] = useState(false);
   const [updateInput, setUpdateInput] = useState(itemProp.title);
+  const { user } = useAuthContext();
 
   const handleEditing = () => {
     setEditing(true);
@@ -33,7 +36,13 @@ function TodoItem({itemProp, handleChange, delTodo, setUpdate}) {
     <li className={styles.item}>
       <div className={styles.content} style={viewMode}>
         <input type="checkbox" onChange={() => handleChange(itemProp.id)} />
-        <button onClick={handleEditing}>Edit</button>
+        {user && (
+          <button onClick={handleEditing}>
+            <AiFillEdit
+              style={{ color: '#5e5e5e', fontSize: '16px' }}
+            />
+          </button>
+        )}
         <button onClick={() => delTodo(itemProp.id)}>Delete</button>
         <span style={itemProp.completed ? completedStyle : null}>
           {updateInput}
